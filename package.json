@@ -1,10 +1,9 @@
 {
-  "name": "atom-language-emblem",
-  "version": "0.0.0",
-  "description": "A short description of your package",
-  "keywords": [
-  ],
-  "repository": "https://github.com/atom/atom-language-emblem",
+  "name": "atom-emblem",
+  "version": "0.1.0",
+  "description": "Emblem language for Atom",
+  "keywords": ["emblem", "emblemjs", "ember", "emberjs"],
+  "repository": "https://github.com/zb3k/atom-emblem",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"

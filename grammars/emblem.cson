@@ -5,20 +5,25 @@ fileTypes: [
 ]
 name: "Emblem"
 patterns: [
+  {include: "#comment"}
+  {include: "#flow_control"}
+  {include: "#tag-selector"}
+  {include: "#tag-alone"}
+  {include: "#text"}
+  {include: "#expression"}
   {
-    include: "#comment"
-  }
-  {
-    include: "#tag-selector"
-  }
-  {
-    include: "#tag-alone"
-  }
-  {
-    include: "#text"
-  }
-  {
-    include: "#expression"
+    begin: "^\\s*(-|=|!=)"
+    end: "$"
+    name: "source.js.embedded.emblem"
+    patterns: [
+      {
+        include: "source.js"
+      }
+      {
+        match: "\\b(each)\\b"
+        name: "keyword.control.js"
+      }
+    ]
   }
 ]
 repository:
@@ -61,9 +66,7 @@ repository:
     comment: "An expression like button{action \"foo\"} or span class={ isActive:active \"foo\" }"
     end: "(})"
     patterns: [
-      {
-        include: "#expression-includes"
-      }
+      {include: "#expression-includes"}
     ]
   expression:
     begin: "((?:==?\\s?)?[\\w-]+)"
@@ -74,33 +77,17 @@ repository:
     end: "(?=:\\s|\\s=|$|\\||'[^']+$)"
     name: "meta.expression.emblem"
     patterns: [
-      {
-        include: "#expression-includes"
-      }
+      {include: "#expression-includes"}
     ]
   "expression-includes":
     patterns: [
-      {
-        include: "#tag-attribute"
-      }
-      {
-        include: "#double-quote-string"
-      }
-      {
-        include: "#single-quote-string"
-      }
-      {
-        include: "#keyword"
-      }
-      {
-        include: "#boolean"
-      }
-      {
-        include: "#number"
-      }
-      {
-        include: "#variable"
-      }
+      {include: "#tag-attribute"}
+      {include: "#double-quote-string"}
+      {include: "#single-quote-string"}
+      {include: "#keyword"}
+      {include: "#boolean"}
+      {include: "#number"}
+      {include: "#variable"}
     ]
   "inline-expression":
     begin: "({{)"
@@ -113,9 +100,7 @@ repository:
       "1":
         name: "storage.type.function.emblem support.constant.emblem"
     patterns: [
-      {
-        include: "#expression-includes"
-      }
+      {include: "#expression-includes"}
     ]
   "inline-expression-alternative":
     begin: "(#\\{)"
@@ -128,9 +113,7 @@ repository:
       "1":
         name: "storage.type.function.emblem support.constant.emblem"
     patterns: [
-      {
-        include: "#expression-includes"
-      }
+      {include: "#expression-includes"}
     ]
   "inline-expression-unescaped":
     begin: "({{{)"
@@ -143,13 +126,31 @@ repository:
       "1":
         name: "storage.type.function.emblem support.constant.emblem"
     patterns: [
-      {
-        include: "#expression-includes"
-      }
+      {include: "#expression-includes"}
     ]
   keyword:
     match: "\\b(in)\\b"
     name: "keyword.control.emblem"
+  flow_control:
+    begin: '(for|if|else if|else|each|until|while|unless|case)(\\s+|$)'
+    captures:
+      "1":
+        name: "storage.type.function.emblem"
+    comment: "Emblem control flow."
+    end: "$"
+    name: "meta.control.flow.emblem"
+    patterns: [
+      {
+        begin: ""
+        end: "$"
+        name: "js.embedded.control.flow.emblem"
+        patterns: [
+          {
+            include: "source.js"
+          }
+        ]
+      }
+    ]
   number:
     match: "\\d+(\\.\\d+)?"
     name: "constant.numeric.emblem"
@@ -178,9 +179,7 @@ repository:
     end: "(?=:\\s|\\s=|$)"
     name: "meta.tag.emblem"
     patterns: [
-      {
-        include: "#tag-includes"
-      }
+      {include: "#tag-includes"}
     ]
   "tag-attribute":
     begin: " (?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9]+)="
@@ -196,42 +195,20 @@ repository:
     comment: "Custom attributes on tags and helpers (class=\"foo\", click=\"save\")"
     end: "(?=[\\s$})]|:\\s)"
     patterns: [
-      {
-        include: "#double-quote-string"
-      }
-      {
-        include: "#single-quote-string"
-      }
-      {
-        include: "#boolean"
-      }
-      {
-        include: "#number"
-      }
-      {
-        include: "#variable"
-      }
-      {
-        include: "#explicit-attribute-expression"
-      }
+      {include: "#double-quote-string"}
+      {include: "#single-quote-string"}
+      {include: "#boolean"}
+      {include: "#number"}
+      {include: "#variable"}
+      {include: "#explicit-attribute-expression"}
     ]
   "tag-includes":
     patterns: [
-      {
-        include: "#inline-expression-unescaped"
-      }
-      {
-        include: "#inline-expression"
-      }
-      {
-        include: "#inline-expression-alternative"
-      }
-      {
-        include: "#explicit-attribute-expression"
-      }
-      {
-        include: "#tag-attribute"
-      }
+      {include: "#inline-expression-unescaped"}
+      {include: "#inline-expression"}
+      {include: "#inline-expression-alternative"}
+      {include: "#explicit-attribute-expression"}
+      {include: "#tag-attribute"}
     ]
   "tag-selector":
     begin: "((?:%[\\w-]+)|(?:a|abbr|acronym|address|area|article|aside|audio|b|base|big|blockquote|body|br|button|canvas|caption|cite|code|col|colgroup|datalist|dd|del|details|dfn|dialog|div|dl|dt|em|eventsource|fieldset|figure|figcaption|footer|form|frame|frameset|(?:h[1-6])|head|header|hgroup|hr|html|i|iframe|img|input|ins|kbd|label|legend|li|link|map|mark|menu|meta|meter|nav|noframes|noscript|object|ol|optgroup|option|output|p|param|pre|progress|q|samp|script|section|select|small|span|strike|strong|style|sub|summary|sup|table|tbody|td|textarea|tfoot|th|thead|time|title|tr|tt|ul|var|video))?([.#][.#\\w-]+)"
@@ -244,9 +221,7 @@ repository:
     end: "(?=:\\s|\\s=|$)"
     name: "meta.tag.emblem"
     patterns: [
-      {
-        include: "#tag-includes"
-      }
+      {include: "#tag-includes"}
     ]
   text:
     begin: "(?=(\\||')\\s*.)"
@@ -254,15 +229,9 @@ repository:
     end: "(?=$)"
     name: "markup.raw.emblem"
     patterns: [
-      {
-        include: "#inline-expression-unescaped"
-      }
-      {
-        include: "#inline-expression"
-      }
-      {
-        include: "#inline-expression-alternative"
-      }
+      {include: "#inline-expression-unescaped"}
+      {include: "#inline-expression"}
+      {include: "#inline-expression-alternative"}
     ]
   variable:
     match: "\\b[\\w.-]+!?(?![\\w-])"

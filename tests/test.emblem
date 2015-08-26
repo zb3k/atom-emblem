@@ -1,0 +1,161 @@
+/ Tags
+/------------------------------------------------------------------------------
+h1 Welcome to Emblem
+
+%blink buy it on Kozmo.com
+
+
+/ Indentation Wrapping
+/------------------------------------------------------------------------------
+footer
+  ul
+    li Hello
+    li Goodbye
+
+
+/ CSS Classes
+/------------------------------------------------------------------------------
+.title Title
+
+h1.logo Law Blog
+
+button.btn.btn-large Submit
+
+
+/ IDs
+/------------------------------------------------------------------------------
+#page-content Content
+
+span#name Bob Lablah
+
+
+/ HTML Attributes
+/------------------------------------------------------------------------------
+button.close data-dismiss="modal" x
+
+/ For Vanilla Handlebars mode only
+button class="large {{foo}}" x
+
+/ For Ember Handlebars
+button class="large {{unbound foo}}" x
+
+/ Shorthand for Ember
+button class=foo! x
+
+
+/ Comments
+/------------------------------------------------------------------------------
+/ Some comment
+
+/ A long long
+  multiline comment
+
+
+/ Plain Text
+/------------------------------------------------------------------------------
+| Some content
+
+p
+  | Lorem #{link-to 'something' | ipsum} dolor sit amet, consectetur
+    adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+    dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud
+    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+span.name Your name is {{name}}
+          and my name is #{author}
+
+span
+  ' Trailing space
+
+
+/ Handlebars Expressions
+/------------------------------------------------------------------------------
+h1 = name
+p
+  = intro
+  = highlight name
+
+
+/ Unescaped Expressions
+/------------------------------------------------------------------------------
+body
+  == outlet
+
+
+/ Handlebars Block Helpers
+/------------------------------------------------------------------------------
+ul
+  each person in people
+    li = person
+
+link-to "home" | Link Text
+
+list nav id="nav-bar" class="top"
+  a href="url" = title
+
+= strong
+  = something
+
+if something
+  p Something!
+else
+  p Something else!
+
+
+/ Condensed Nesting with Colon Separator (NEW)
+/------------------------------------------------------------------------------
+#content-frame: .container: .row:
+  .span4: render "sidebar"
+  .span8: render "main"
+
+footer: ul.menu-items: each menu_items: li: a.menu-link href=url: link_text
+
+
+/ Views (Ember)
+/------------------------------------------------------------------------------
+.field
+  Ember.TextField valueBinding="firstName"
+
+
+/ bind-attr Shorthand (Ember)
+/------------------------------------------------------------------------------
+img src=logoUrl alt="Logo"
+
+div class=condition:whenTrue:whenFalse
+
+div class={ condition1:whenTrue:whenFalse condition2:whenTrue:whenFalse }
+
+
+/ Action / Events Shorthand (Ember)
+/------------------------------------------------------------------------------
+a click="toggleHeader" x
+
+a click="toggleHeader target='view'" x
+
+a click="toggleHeader this" x
+
+form submit="submitTheForm foo"
+  p Hello
+
+
+
+/ Explicit Attribute Expressions
+/------------------------------------------------------------------------------
+button{action "delete"} Delete
+
+img{bind-attr src="logoUrl"} alt="logo"
+a{bind-attr class="isActive"}{action 'toggleHeader'} x
+
+
+/ In-Tag Mustache
+/------------------------------------------------------------------------------
+span.some-class{ someHelper } Hello
+
+
+/ Vanilla Handlebars Partials
+/------------------------------------------------------------------------------
+> partialName
+
+p Check out this partial: #{> partialName}
+
+> partialName foo
