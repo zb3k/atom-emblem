@@ -1,13 +1,17 @@
 {
   "name": "atom-emblem",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Emblem language for Atom",
-  "keywords": ["emblem", "emblemjs", "ember", "emberjs"],
+  "keywords": [
+    "emblem",
+    "emblemjs",
+    "ember",
+    "emberjs"
+  ],
   "repository": "https://github.com/zb3k/atom-emblem",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
