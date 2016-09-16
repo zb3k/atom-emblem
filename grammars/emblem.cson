@@ -39,12 +39,11 @@ repository:
       }
     ]
   comment:
-    captures:
-      "1":
-        name: "punctuation.section.comment.emblem"
-    comment: "A comment, starting with a forward slash"
-    match: "^\\s*(\\/)\\s*\\S.*$\\n?"
-    name: "comment.line.slash.emblem"
+    begin: '^(\\s*)/'
+    comment: 'A comment, starting with a forward slash'
+    end: '^(?!(\\1\\s)|\\s*$)'
+    name: 'comment.unbuffered.block.jade'
+
   "double-quote-string":
     begin: "\""
     beginCaptures:

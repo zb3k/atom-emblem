@@ -45,10 +45,15 @@ button class=foo! x
 
 / Comments
 /------------------------------------------------------------------------------
-/ Some comment
 
-/ A long long
-  multiline comment
+/
+
+/ Some comment 1
+/ Some comment 2
+
+/ Multiline comment
+  Multiline comment
+  Multiline comment
 
 
 / Plain Text
